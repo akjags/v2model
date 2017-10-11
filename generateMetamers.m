@@ -8,7 +8,7 @@
 %    - scale: Critical scaling constant with which to generate metamers
 %    - numMetamers: Number of metamers to generate and output.
 %
-function [res, params] = generateMetamers(imstr, name, scale, numMetamers)
+function [res, params] = generateMetamers(imstr, name, scale, numMetamers, outputPath)
 
 % Specify unspecified inputs
 if ieNotDefined('imstr')
@@ -27,7 +27,9 @@ end
 disp(sprintf('(generateMetamers) Generating %d metamers with scaling %g', numMetamers, scale));
 
 % Path to save synthesized metamers in
-outputPath = fullfile(pwd, 'output');
+if ieNotDefined('outputPath')
+  outputPath = fullfile(pwd, 'output');
+end
 
 % Load image
 oim = double(imread(imstr));
