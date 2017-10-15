@@ -22,6 +22,8 @@ if ieNotDefined('numMetamers')
 end
 if ieNotDefined('name')
   name = '';
+else
+  name = [name, '_'];
 end
 
 disp(sprintf('(generateMetamers) Generating %d metamers with scaling %g', numMetamers, scale));
@@ -52,7 +54,7 @@ params.scale = scale;
 % Synthesize metamers
 for mi = 1:numMetamers
   synthIdx = mi;
-  x = sprintf('%ssynth%d_s%g', name, synthIdx, scale*10);
+  x = sprintf('%ss%g_synth%d', name, scale*10, synthIdx);
   % find first available synth index to save as (to prevent overwriting)
   while exist(sprintf('%s/%s.png', outputPath, x))
     synthIdx = synthIdx+1;
