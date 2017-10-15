@@ -63,7 +63,7 @@ for mi = 1:numMetamers
   x = sprintf('%ss%g_synth%d', name, scale*10, synthIdx); 
   while exist(sprintf('%s/%s.png', outputPath, x))
     synthIdx = synthIdx+1;
-    x = sprintf('%ssynth%d_s%g', name, synthIdx, scale*10);
+    x = sprintf('%ss%g_synth%d', name, scale*10, synthIdx);
   end
   disp(sprintf('Found unused synth index: %d', synthIdx))
  
