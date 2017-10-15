@@ -53,17 +53,22 @@ params.scale = scale;
 
 % Synthesize metamers
 for mi = 1:numMetamers
-  synthIdx = mi;
-  x = sprintf('%ss%g_synth%d', name, scale*10, synthIdx);
+  % Run metamer synthesis
+  t3 = tic;
+  synth = metamerSynthesis(params, size(oim), m, opts);
+  toc(t3);
+
   % find first available synth index to save as (to prevent overwriting)
+  synthIdx = mi;
+  x = sprintf('%ss%g_synth%d', name, scale*10, synthIdx); 
   while exist(sprintf('%s/%s.png', outputPath, x))
     synthIdx = synthIdx+1;
     x = sprintf('%ssynth%d_s%g', name, synthIdx, scale*10);
   end
   disp(sprintf('Found unused synth index: %d', synthIdx))
-  t3 = tic;
-  synth = metamerSynthesis(params, size(oim), m, opts);
+ 
   imwrite(uint8(synth), sprintf('%s/%s.png', outputPath, x));
+  disp(sprintf('Saved to %s/%s.png', outputPath, x));
   res.(x) = synth;
   toc(t3);
 end
